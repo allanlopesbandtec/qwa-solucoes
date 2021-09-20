@@ -1,0 +1,7 @@
+projeto\qwasolucoes\QwaSolucoesApplication.class
+projeto\qwasolucoes\model\CadastroBanco.class
+projeto\qwasolucoes\controller\CadastroController.class
+projeto\qwasolucoes\model\Cadastro.class
+projeto\qwasolucoes\model\Vagas.class
+projeto\qwasolucoes\repository\CadastroRepository.class
+projeto\qwasolucoes\model\Dto\CadastroDto.class
