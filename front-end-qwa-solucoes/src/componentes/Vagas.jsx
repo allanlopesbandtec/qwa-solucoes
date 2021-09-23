@@ -4,17 +4,11 @@ import TabelaCadastros from './tabela/TabelaCadastros';
 
 function Vagas(){
 
-
     const [cadastroList, setCadastroList] = useState([]);
 
-    //const [numeroVagas, setNumeroVagas] = useState(0);
+    const [numeroVagas, setNumeroVagas] = useState(0);
 
     const [cadastro, setCadastro] = useState({});
-
-    const handleSubmit = callback => event => {
-       event.preventDefault();
-       callback();
-    };
 
     const handleChangeCadastro = (event) => {
         const value = { ...cadastro }
@@ -22,34 +16,61 @@ function Vagas(){
         setCadastro(value)
     };
 
-    async function cadastrar() {
-        try {
-            await axios.post(`https://localhost:8080/cadastros/1`, cadastro)
+    const handleChangeVagas = (event) => {
+        const value = { ...numeroVagas }
+        value[event.target.name] = event.target.value;
+        setNumeroVagas(value.numeroVagas)
+    };
+
+    const handleSubmit = event => {
+       cadastrar();
+       event.preventDefault();
+    };
+
+    function cadastrar() {
+
+           axios.post(`http://localhost:8080/cadastros/${numeroVagas}`, cadastro)
             .then((resposta) => {
 
                 if(resposta.status === 201){
-                    alert("Cadastrado com sucesso!")
+                    alert("Adicionado com sucesso!")
+                    setCadastroList(resposta.data)
+                } 
+            }).catch((error) => {
+
+                var x = error.response.data;
+
+                if(typeof x == 'string'){
+                    alert(x)
+                } else{
+                    alert(x.errors[0].defaultMessage)
                 }
-
-                console.log(resposta.data)
-                setCadastroList(resposta.data)
+                
             })
-        } catch (error) {
-            console.log(error)
-        }
-
+       
     }
     
 
     return (
         <>
 
+        {cadastroList.length > 0 ?
+        <>    
+        </> 
+        : 
+        <>     
+        <label htmlFor="numeroVagas">Número de vagas: </label>
+        <input type="text"
+        id="numeroVagas"
+        name="numeroVagas" onChange={handleChangeVagas}/> 
+        </>
+        }
+        
+
         <div>
-
-                <h1>Cadastros de usuários por vaga</h1>
-
+             <h1>Cadastros de usuários por vaga</h1>
+            
             <form onSubmit={handleSubmit}>
-
 
                 <label htmlFor="nome">Nome: </label>
                 <input type="text"
@@ -71,15 +92,13 @@ function Vagas(){
                 id="dtNasc"
                 name="dtNasc" onChange={handleChangeCadastro}/>
             
-
-                <button onClick={cadastrar}>Cadastrar</button>
+                <button type='submit'>Cadastrar</button>
 
             </form>
 
+        </div>
 
             <TabelaCadastros obj={cadastroList} />
-
-        </div>
 
         </>
     )
