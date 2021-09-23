@@ -1,5 +1,8 @@
 package projeto.qwasolucoes.model;
 
+import lombok.AllArgsConstructor;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
@@ -7,6 +10,9 @@ import javax.validation.constraints.NotNull;
 import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
+
+@NoArgsConstructor
+@Data
 @Entity
 public class CadastroBanco {
 
@@ -37,64 +43,9 @@ public class CadastroBanco {
         this.nome = cadastro.getNome();
         this.sobrenome = cadastro.getSobrenome();
         this.cpf = cadastro.getCpf();
-        this.dtNasc = LocalDate.parse(cadastro.getDtNasc());
+        this.dtNasc = cadastro.getDtNasc();
         this.idade = LocalDate.now().getYear() - dtNasc.getYear();
         this.maiorDeIdade = idade >= 18;
     }
 
-    public Integer getId() {
-        return id;
-    }
-
-    public void setId(Integer id) {
-        this.id = id;
-    }
-
-    public String getNome() {
-        return nome;
-    }
-
-    public void setNome(String nome) {
-        this.nome = nome;
-    }
-
-    public String getSobrenome() {
-        return sobrenome;
-    }
-
-    public void setSobrenome(String sobrenome) {
-        this.sobrenome = sobrenome;
-    }
-
-    public String getCpf() {
-        return cpf;
-    }
-
-    public void setCpf(String cpf) {
-        this.cpf = cpf;
-    }
-
-    public LocalDate getDtNasc() {
-        return dtNasc;
-    }
-
-    public void setDtNasc(LocalDate dtNasc) {
-        this.dtNasc = dtNasc;
-    }
-
-    public Integer getIdade() {
-        return idade;
-    }
-
-    public void setIdade(Integer idade) {
-        this.idade = idade;
-    }
-
-    public Boolean getMaiorDeIdade() {
-        return maiorDeIdade;
-    }
-
-    public void setMaiorDeIdade(Boolean maiorDeIdade) {
-        this.maiorDeIdade = maiorDeIdade;
-    }
 }

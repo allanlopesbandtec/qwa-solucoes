@@ -5,7 +5,6 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 import projeto.qwasolucoes.model.Cadastro;
 import projeto.qwasolucoes.model.CadastroBanco;
-import projeto.qwasolucoes.model.ErrorsHttp;
 import projeto.qwasolucoes.repository.CadastroRepository;
 
 import javax.validation.Valid;
@@ -30,14 +29,14 @@ public class CadastroController {
         numeroCandidatos = 3 * numeroVagas;
 
         if (cadastroDtoList.size() == numeroCandidatos){
-            return ResponseEntity.status(400).body(
-                    String.format("Não é possível cadastrar mais de %d pessoas", numeroCandidatos));
+            return ResponseEntity.status(400).body(String.format("Não é possível cadastrar mais de %d pessoas", numeroCandidatos));
+                    //
         }else {
             CadastroBanco novoCadastroBanco = new CadastroBanco(cadastro);
 
             for (CadastroBanco cadastroBanco : cadastroDtoList){
                 if (cadastroBanco.getCpf().equals(novoCadastroBanco.getCpf())) {
-                    return ResponseEntity.badRequest().build();
+                    return ResponseEntity.badRequest().body("Cpf já cadastrado");
                 }
             }
 
