@@ -1,7 +1,5 @@
 package projeto.qwasolucoes.model;
 
-
-import org.hibernate.validator.constraints.UniqueElements;
 import org.hibernate.validator.constraints.br.CPF;
 import javax.persistence.*;
 import javax.validation.constraints.*;
@@ -10,17 +8,21 @@ import javax.validation.constraints.*;
 public class Cadastro {
 
     @NotNull(message = "Nome é obrigatório. O Cliente não foi adicionado à lista")
+    @Column(nullable = false)
     private String nome;
 
     @NotNull(message = "Sobrenome é obrigatório. O Cliente não foi adicionado à lista")
+    @Column(nullable = false)
     private String sobrenome;
 
     @NotNull(message = "Cpf é obrigatório. O Cliente não foi adicionado à lista")
     @CPF(message = "Cpf inválido")
-    @Column(unique = true)
+    @Column(unique = true, nullable = false)
     private String cpf;
 
+    //@Past(message = "A data deve ser passado")
     @NotNull(message = "A data de nascimento é obrigatória. O Cliente não foi adicionado à lista")
+    @Column(nullable = false)
     private String dtNasc;
 
     public Cadastro(String nome, String sobrenome, String cpf, String dtNasc) {

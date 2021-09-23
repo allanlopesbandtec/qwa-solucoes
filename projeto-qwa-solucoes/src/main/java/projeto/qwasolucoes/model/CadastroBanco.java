@@ -4,6 +4,7 @@ import org.hibernate.validator.constraints.br.CPF;
 
 import javax.persistence.*;
 import javax.validation.constraints.NotNull;
+import javax.validation.constraints.Past;
 import java.time.LocalDate;
 
 @Entity
@@ -24,6 +25,7 @@ public class CadastroBanco {
     @Column(unique = true)
     private String cpf;
 
+    @Past(message = "A data deve ser passado")
     @NotNull(message = "A data de nascimento é obrigatória. O Cliente não foi adicionado à lista")
     private LocalDate dtNasc;
 
