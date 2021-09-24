@@ -1,0 +1,124 @@
+body {
+  min-height: 100vh;
+
+}
+
+header{
+  width: 100%;
+  height: 50px;
+  padding: 10px;
+  background-image: linear-gradient(to right, white, #ac5da9, #ac5da1, #711e6d);
+}
+
+header img{
+  height: 100px;
+  width: 200px;
+}
+
+.conteudo{
+  display: inline-block;
+  width: 20%;
+  min-height: 90vh;
+  height: 100%;
+}
+
+.campo-vagas{
+  display: inline-block;
+  font-weight: 600;
+  margin: 20px;
+  margin-left: 50px;
+  width: 100%;
+}
+
+.campo-vagas label{
+  color: #691b67;
+  text-transform: uppercase;
+}
+
+.campo-vagas input{
+  width: 65px;
+  height: 25px;
+  padding: 15px;
+  font-size: 1.0em;
+  font-weight: 600;
+}
+
+header button{
+  width: 200px;
+  float: right;
+  padding: 5px;
+  background-color: #ac5da9;
+  color: white;
+  font-weight: 700;
+  border: 1px solid #471446;
+  text-transform: uppercase; 
+
+  transition: 0.3s;
+}
+
+form {
+  margin-left: 20px;
+  width: 55%;
+  height: 100%;
+  min-width: 300px;
+  min-height: 100vh;
+  background-color: #691b66bc;
+  padding: 40px;
+  border-radius: 3px;
+}
+
+form h3{
+  text-align: center;
+  font-weight: 700;
+  font-size: 1.0rem;
+  color: white;
+  margin-bottom: 30px;
+  text-transform: uppercase;
+}
+
+.campo-form{
+  margin-bottom: 30px;
+  width: 100%;
+}
+
+.campo-form label{
+  color: white;
+  font-weight: 700;
+  text-transform: uppercase;
+}
+
+.campo-form input{
+  outline: none;
+  padding: 10px;
+
+  width: 100%;
+  height: 30px;
+  font-size: 1.0em;
+}
+
+form button{
+  margin-top: 50px;
+  width: 100%;
+  height: 30px;
+  background-color: #ac5da9;
+  color: white;
+  font-weight: 700;
+  border: 1px solid #471446;
+  text-transform: uppercase;
+
+}
+
+
+.tabela{
+  margin-right: 45px;
+  margin-top: 60px;
+  width: 70%; 
+  display: block;
+  float: right;
+}
+
+
+button:hover{
+   background-color: #691b67;
+}
+

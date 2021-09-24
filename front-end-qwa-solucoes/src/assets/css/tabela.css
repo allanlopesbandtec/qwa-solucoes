@@ -1,0 +1,24 @@
+table {
+    width: 100%;
+    list-style: none;
+}
+
+.titulo{
+    border: 1px solid #aa58a7;
+}
+
+table th{
+    font-weight: 100;
+    font-size: 1.5em;
+    text-align: left;
+    color: #611b61;
+    border-bottom: 1px solid #aa58a7;
+    text-transform: uppercase;
+}
+
+tbody td{
+    padding-top: 15px;
+    font-size: 1.3em;
+
+}
+
