@@ -1,5 +1,4 @@
 import React from "react";
-//import Cadastros from "./componentes/Cadastros";
 import Vagas from "./componentes/Vagas";
 
 import {
