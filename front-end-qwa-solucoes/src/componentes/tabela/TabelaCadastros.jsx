@@ -1,4 +1,5 @@
 import React from "react";
+import '../../assets/css/tabela.css'
 
 function TabelaCadastros(props) {
 
@@ -23,21 +24,19 @@ function TabelaCadastros(props) {
   }
 
   return (
-    <div className="TabelaProdutos">
-      <table style={{ listStyle: "none" }} border={1}>
+      <table>
         <thead>
-          <tr>
+          <tr className="titulo">
             <th>Nome</th>
             <th>Sobrenome</th>
-            <th>Cpf</th>
-            <th>Data de nascimento</th>
+            <th>CPF</th>
+            <th>Nascimento</th>
             <th>Idade</th>
-            <th>É maior de idade ?</th>
+            <th>Maior de idade</th>
           </tr>
         </thead>
         <tbody>{getLinhas()}</tbody>
       </table>
-    </div>
   );
 };
 
