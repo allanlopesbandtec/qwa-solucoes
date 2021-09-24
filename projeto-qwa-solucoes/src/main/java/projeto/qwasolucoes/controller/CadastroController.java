@@ -9,6 +9,7 @@ import projeto.qwasolucoes.repository.CadastroRepository;
 
 import javax.validation.Valid;
 import java.util.ArrayList;
+import java.util.Collections;
 import java.util.List;
 
 @RestController
@@ -20,7 +21,7 @@ public class CadastroController {
 
     List<CadastroBanco> cadastroDtoList = new ArrayList<>();
 
-    Integer numeroCandidatos= 0;
+    Integer numeroCandidatos = 0;
 
     @PostMapping("/{numeroVagas}")
     public ResponseEntity<?> cadastroCandidatos(@RequestBody @Valid Cadastro cadastro,
@@ -30,14 +31,23 @@ public class CadastroController {
 
         if (cadastroDtoList.size() == numeroCandidatos){
             return ResponseEntity.status(400).body(String.format("Não é possível cadastrar mais de %d pessoas", numeroCandidatos));
-                    //
         }else {
             CadastroBanco novoCadastroBanco = new CadastroBanco(cadastro);
 
-            for (CadastroBanco cadastroBanco : cadastroDtoList){
-                if (cadastroBanco.getCpf().equals(novoCadastroBanco.getCpf())) {
-                    return ResponseEntity.badRequest().body("Cpf já cadastrado");
+            String validacao = cadastroRepository.procurarCpf(cadastro.getCpf());
+
+            if (validacao == null){
+
+                for (CadastroBanco cadastroBanco : cadastroDtoList){
+                    if (cadastroBanco.getCpf().equals(novoCadastroBanco.getCpf())) {
+
+                        System.out.println(cadastroRepository.procurarCpf(cadastro.getCpf()));
+
+                        return ResponseEntity.badRequest().body("Cpf já cadastrado");
+                    }
                 }
+            }else {
+                return ResponseEntity.badRequest().body("Cpf já cadastrado");
             }
 
             cadastroDtoList.add(novoCadastroBanco);
@@ -48,11 +58,17 @@ public class CadastroController {
     @PostMapping("/salvar")
     public ResponseEntity<?> salvarCadastros() {
 
-            for (CadastroBanco cadastroBanco : cadastroDtoList) {
-                cadastroRepository.save(cadastroBanco);
-            }
+        if (cadastroDtoList.isEmpty()){
+            return ResponseEntity.badRequest().body("Tabela de cadastros vazia!");
+        }
 
-            return ResponseEntity.created(null).build();
+        for (CadastroBanco cadastroBanco : cadastroDtoList){
+            cadastroRepository.save(cadastroBanco);
+        }
+
+        cadastroDtoList.removeAll(Collections.synchronizedList(cadastroDtoList));
+        return ResponseEntity.created(null).build();
+
     }
 
 }
